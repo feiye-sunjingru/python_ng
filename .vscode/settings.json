@@ -21,5 +21,10 @@
     // 明确指定 .py 文件使用 PyFormat
     "[python]": {
         "editor.defaultFormatter": "giyyapan.pyformat"
-    }
+    },
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
