@@ -1,0 +1,25 @@
+{
+    // 指定使用哪个格式化器
+    "pyformat.formatProvider": "black",
+    // black 参数（例如行宽）
+    "pyformat.blackArgs": [
+        "--line-length",
+        "88"
+    ],
+    // isort 参数（兼容 black）
+    "pyformat.isortArgs": [
+        "--profile",
+        "black"
+    ],
+    // 启用自动整理 imports（默认 true）
+    "pyformat.enableImportOrganization": false,
+    // 保存时自动格式化 + 整理 imports
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    // 明确指定 .py 文件使用 PyFormat
+    "[python]": {
+        "editor.defaultFormatter": "giyyapan.pyformat"
+    }
+}
