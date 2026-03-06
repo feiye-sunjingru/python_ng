@@ -115,5 +115,23 @@ class TestUnpacking:
         assert func(*args, **kwargs) == 10
 
 
+# ==================== 字符串格式化测试 ====================
+
+
+def test_string_formatting():
+    """测试字符串格式化（与参数传递无关，单独测试）"""
+    print("=" * 60)
+    print("📌 测试 7: 字符串格式化")
+    print("=" * 60)
+
+    # 位置参数
+    print("我叫{},今年{}岁了！".format("小白芽", 18))
+
+    # 关键字参数
+    print("我叫{name},今年{age}岁了！".format(name="小白芽", age=18))
+    print()
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
+    test_string_formatting()
