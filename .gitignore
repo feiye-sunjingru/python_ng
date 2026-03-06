@@ -4,3 +4,5 @@ uv.lock
 .pytest_cache/
 __pycache__/
 .env
+tmp_output/
+tmp_input/
