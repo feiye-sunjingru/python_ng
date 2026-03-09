@@ -8,7 +8,6 @@ def write_file(*args, **kwargs):
     1. 每个城市的天气占一行
     2. 每行的格式为: city-北京,cityid-101010100,temp-18...
     """
-    # 补充代码
     with open("tmp_output/weather_info.txt", "w", encoding="utf-8") as f:
         for weather_info in args:
             city = weather_info["weatherinfo"]["city"]
