@@ -126,9 +126,11 @@ def test_string_formatting():
 
     # 位置参数
     print("我叫{},今年{}岁了！".format("小白芽", 18))
+    print("我叫{},今年{}岁了！".format(*["小白芽", 18]))
 
     # 关键字参数
     print("我叫{name},今年{age}岁了！".format(name="小白芽", age=18))
+    print("我叫{name},今年{age}岁了！".format(**{"name": "小白芽", "age": 18}))
     print()
 
 
