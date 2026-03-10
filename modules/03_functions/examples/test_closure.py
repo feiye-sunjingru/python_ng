@@ -29,6 +29,16 @@ def run_with_counter():
     return increment
 
 
+def get_score_data():
+    scores = []
+
+    def inner(val):
+        scores.append(val)
+        print(scores)
+
+    return inner
+
+
 class TestClosureAndScope(unittest.TestCase):
     """闭包与作用域测试类"""
 
@@ -63,6 +73,13 @@ class TestClosureAndScope(unittest.TestCase):
         self.assertEqual(counter2(), 1)  # 独立计数
         self.assertEqual(counter1(), 2)
         self.assertEqual(counter2(), 2)
+
+    def test_list_capture_in_closure(self):
+        """测试闭包捕获列表变量"""
+        score_func = get_score_data()
+        self.assertEqual(score_func(10), [10])
+        self.assertEqual(score_func(20), [10, 20])
+        self.assertEqual(score_func(30), [10, 20, 30])
 
 
 class TestScopeRules(unittest.TestCase):
