@@ -273,10 +273,11 @@ print("\n" + "=" * 50)
 print("第 8 组：文件操作")
 print("=" * 50)
 
-# open - 文件读写
-with open("test.txt", "w", encoding="utf-8") as f:
-    f.write("Hello, Python!")
+if __name__ == "__main__":
+    # open - 文件读写
+    with open("test.txt", "w", encoding="utf-8") as f:
+        f.write("Hello, Python!")
 
-with open("test.txt", "r", encoding="utf-8") as f:
-    content = f.read()
-    print(f"文件内容：{content}")
+    with open("test.txt", "r", encoding="utf-8") as f:
+        content = f.read()
+        print(f"文件内容：{content}")
