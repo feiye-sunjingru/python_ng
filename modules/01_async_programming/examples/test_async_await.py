@@ -1,4 +1,5 @@
-import asyncio, time
+import asyncio
+import time
 
 
 async def task1():
