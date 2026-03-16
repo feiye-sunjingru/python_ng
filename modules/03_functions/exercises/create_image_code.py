@@ -57,7 +57,9 @@ def create_image_code(
             code_string = text
         else:
             char_list = get_chars()
-            code_string = "".join(char_list)  # 每个字符前后以空格隔开（实际不加空格更常见）
+            code_string = "".join(
+                char_list
+            )  # 每个字符前后以空格隔开（实际不加空格更常见）
 
         # 设置字体（根据系统选择）
         # Windows 系统字体

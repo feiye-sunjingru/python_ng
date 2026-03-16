@@ -1,10 +1,12 @@
 import asyncio
 import time
 
+
 def cpu_bound_task(n):
     # 模拟耗时计算（无任何 IO）
     total = sum(i * i for i in range(n))
     return total
+
 
 async def main():
     loop = asyncio.get_running_loop()
@@ -13,5 +15,6 @@ async def main():
     future = loop.run_in_executor(None, cpu_bound_task, 10_000_000)
     result = await future  # 非 IO 操作，但用了 Future
     print(result)
+
 
 asyncio.run(main())

@@ -87,6 +87,7 @@ class TestScopeRules(unittest.TestCase):
 
     def test_legb_rule(self):
         """测试 LEGB 作用域查找规则"""
+
         # Local -> Enclosing -> Global -> Built-in
         def outer():
             x = "enclosing"

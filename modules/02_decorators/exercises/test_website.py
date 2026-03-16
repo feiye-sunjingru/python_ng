@@ -1,6 +1,7 @@
 """
 快速创建一个网站
 """
+
 from flask import Flask
 
 
@@ -20,6 +21,7 @@ def auth(func):
 app = Flask(__name__)
 # 配置：忽略尾随斜杠（可选）
 app.url_map.strict_slashes = False
+
 
 # 定义视图函数（处理请求的函数）:当用户访问某个 URL 时，返回对应的响应内容
 # 访问 http://127.0.0.1:5000/index/ → 显示 “首页”

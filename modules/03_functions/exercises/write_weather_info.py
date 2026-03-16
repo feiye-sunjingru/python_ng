@@ -27,7 +27,10 @@ def get_weather(code):
     return weather_dict
 
 
-city_list = [{"code": "101020100", "title": "上海"}, {"code": "101010100", "title": "北京"}]
+city_list = [
+    {"code": "101020100", "title": "上海"},
+    {"code": "101010100", "title": "北京"},
+]
 
 if __name__ == "__main__":
     weather_info_list = []

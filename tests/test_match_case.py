@@ -130,7 +130,6 @@ class TestMatchCase:
             (999, "Unknown"),
         ],
     )
-
     def test_match_status_parametrized(self, status, expected):
         """参数化测试 HTTP 状态码匹配"""
         result = ""

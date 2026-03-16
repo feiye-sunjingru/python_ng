@@ -78,7 +78,9 @@ except ZeroDivisionError:
 
     # 方法 3：获取异常对象信息
     print("\n【方法 3】异常对象信息:")
-    print(f"异常类型：{type(value).__name__ if 'value' in dir() else 'ZeroDivisionError'}")
+    print(
+        f"异常类型：{type(value).__name__ if 'value' in dir() else 'ZeroDivisionError'}"
+    )
     print(f"异常模块：{ZeroDivisionError.__module__}")
 
 
