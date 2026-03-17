@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.13"]
 
     steps:
       - uses: actions/checkout@v4
@@ -25,9 +25,16 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest  # 如果你用 pytest；若用 unittest 可省略
+          pip install -e .  # 使用 pyproject.toml 安装依赖
+          pip install pytest mypy black flake8 isort pre-commit
+
+      - name: Run linters and type checker
+        run: |
+          black --check modules/
+          isort --check modules/
+          flake8 modules/
+          mypy modules/
 
       - name: Run tests
         run: |
-          pytest  # 或者 python -m unittest discover（根据你的测试框架调整）
+          pytest
