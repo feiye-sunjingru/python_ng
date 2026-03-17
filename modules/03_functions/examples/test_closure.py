@@ -1,5 +1,6 @@
 # test_modules.py
 """Python 闭包与作用域测试模块"""
+
 import unittest
 
 # 全局变量

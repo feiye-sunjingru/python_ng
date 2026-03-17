@@ -26,7 +26,7 @@ def test_mutable_objects():
     print(f"l1 id: {id(l1)}, 值：{l1}")
     print(f"l2 id: {id(l2)}, 值：{l2}")
     print(f"l1 is l2: {l1 is l2}")
-    print(f"✅ 结论：每次调用创建新对象，内存地址不同\n")
+    print("✅ 结论：每次调用创建新对象，内存地址不同\n")
 
 
 # ==================== 不可变对象测试 ====================
@@ -50,7 +50,7 @@ def test_immutable_objects():
     print(f"a id: {id(a)}, 值：{a}")
     print(f"b id: {id(b)}, 值：{b}")
     print(f"a is b: {a is b}")
-    print(f"✅ 结论：小整数被缓存，复用同一对象\n")
+    print("✅ 结论：小整数被缓存，复用同一对象\n")
 
     # 字符串驻留
     print("=" * 60)
@@ -67,7 +67,7 @@ def test_immutable_objects():
     print(f"s1 id: {id(s1)}, 值：{s1}")
     print(f"s2 id: {id(s2)}, 值：{s2}")
     print(f"s1 is s2: {s1 is s2}")
-    print(f"✅ 结论：相同字符串被 intern，复用同一对象\n")
+    print("✅ 结论：相同字符串被 intern，复用同一对象\n")
 
     # 动态字符串
     print("=" * 60)
@@ -89,7 +89,7 @@ def test_immutable_objects():
     r1 = get_dyn_str2()
     r2 = get_dyn_str2()
     print(f"运行时拼接：get_dyn_str2() is get_dyn_str2() = {r1 is r2}")
-    print(f"✅ 结论：编译时优化可能 intern，运行时拼接通常不 intern\n")
+    print("✅ 结论：编译时优化可能 intern，运行时拼接通常不 intern\n")
 
 
 # ==================== 特殊对象测试 ====================
@@ -111,7 +111,7 @@ def test_special_objects():
     print(f"t1 id: {id(t1)}, 值：{t1}")
     print(f"t2 id: {id(t2)}, 值：{t2}")
     print(f"t1 is t2: {t1 is t2}")
-    print(f"✅ 结论：空元组是单例，全局只有一个对象\n")
+    print("✅ 结论：空元组是单例，全局只有一个对象\n")
 
     # None 测试
     print("=" * 60)
@@ -128,7 +128,7 @@ def test_special_objects():
     print(f"n1 id: {id(n1)}, 值：{n1}")
     print(f"n2 id: {id(n2)}, 值：{n2}")
     print(f"n1 is n2: {n1 is n2}")
-    print(f"✅ 结论：None 是单例，全局只有一个对象\n")
+    print("✅ 结论：None 是单例，全局只有一个对象\n")
 
 
 # ==================== 对比测试 ====================
@@ -155,7 +155,7 @@ def test_comparison():
 
     print(f"列表：get_list() is get_list() = {list1 is list2}")
     print(f"元组：get_tuple() is get_tuple() = {tuple1 is tuple2}")
-    print(f"✅ 结论：可变对象每次新建，不可变对象可能复用\n")
+    print("✅ 结论：可变对象每次新建，不可变对象可能复用\n")
 
 
 # ==================== 总结 ====================
@@ -166,8 +166,7 @@ def print_summary():
     print("=" * 60)
     print("📚 Python 对象缓存机制总结")
     print("=" * 60)
-    print(
-        """
+    print("""
     | 对象类型      | 示例           | 缓存/驻留 | 多次返回是否同一对象 |
     |---------------|----------------|-----------|---------------------|
     | 小整数        | -5 ~ 256       | ✅ 缓存   | 是（同一 ID）        |
@@ -184,8 +183,7 @@ def print_summary():
     2. 字符串驻留：相同字符串字面量共享同一对象
     3. 单例对象：None、空元组、空字符串等全局唯一
     4. 可变对象：每次创建新对象，保证独立性
-    """
-    )
+    """)
     print("=" * 60)
 
 
