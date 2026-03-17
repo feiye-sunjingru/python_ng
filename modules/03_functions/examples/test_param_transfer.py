@@ -25,7 +25,7 @@ def test_immutable_objects():
     print(f"调用前 - id: {id(a)}, 值：{a}")
     modify_num(a)
     print(f"调用后 - id: {id(a)}, 值：{a}")
-    print(f"✅ 结论：原对象未改变\n")
+    print("✅ 结论：原对象未改变\n")
 
     # 字符串测试
     print("=" * 60)
@@ -42,7 +42,7 @@ def test_immutable_objects():
     print(f"调用前 - id: {id(text)}, 值：{text}")
     modify_string(text)
     print(f"调用后 - id: {id(text)}, 值：{text}")
-    print(f"✅ 结论：原对象未改变\n")
+    print("✅ 结论：原对象未改变\n")
 
 
 # ==================== 可变对象测试 ====================
@@ -64,7 +64,7 @@ def test_mutable_objects():
     print(f"调用前 - id: {id(my_list)}, 值：{my_list}")
     modify_list(my_list)
     print(f"调用后 - id: {id(my_list)}, 值：{my_list}")
-    print(f"⚠️  结论：原对象被改变\n")
+    print("⚠️  结论：原对象被改变\n")
 
     # 字典测试
     print("=" * 60)
@@ -81,7 +81,7 @@ def test_mutable_objects():
     print(f"调用前 - id: {id(person)}, 值：{person}")
     modify_dict(person)
     print(f"调用后 - id: {id(person)}, 值：{person}")
-    print(f"⚠️  结论：原对象被改变\n")
+    print("⚠️  结论：原对象被改变\n")
 
 
 # ==================== 特殊情况测试 ====================
@@ -103,7 +103,7 @@ def test_special_cases():
     print(f"调用前 - id: {id(my_list)}, 值：{my_list}")
     reassign_list(my_list)
     print(f"调用后 - id: {id(my_list)}, 值：{my_list}")
-    print(f"✅ 结论：重新赋值不影响原对象\n")
+    print("✅ 结论：重新赋值不影响原对象\n")
 
     # 使用切片避免修改原对象
     print("=" * 60)
@@ -121,7 +121,7 @@ def test_special_cases():
     print(f"调用前 - 原列表：{my_list}")
     safe_modify_list(my_list)
     print(f"调用后 - 原列表：{my_list}")
-    print(f"✅ 结论：使用副本可保护原对象\n")
+    print("✅ 结论：使用副本可保护原对象\n")
 
 
 # ==================== 总结 ====================
@@ -132,8 +132,7 @@ def print_summary():
     print("=" * 60)
     print("📚 Python 参数传递总结")
     print("=" * 60)
-    print(
-        """
+    print("""
     核心机制：对象引用传递
 
     | 对象类型 | 示例              | 函数内修改 | 影响原对象 |
@@ -145,8 +144,7 @@ def print_summary():
     1. 不想影响原对象 → 传递副本（lst.copy() 或 lst[:]）
     2. 函数内避免重新赋值 → 使用返回值
     3. 文档说明是否会修改传入对象
-    """
-    )
+    """)
     print("=" * 60)
 
 

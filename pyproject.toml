@@ -20,7 +20,12 @@ dependencies = [
     "types-pyyaml>=6.0.12.20250915",
     "types-requests>=2.32.4.20260107",
 ]
+
 [tool.mypy]
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = false
+
+[tool.black]
+target-version = ["py313"]
+line-length = 88
