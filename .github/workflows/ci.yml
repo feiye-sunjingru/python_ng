@@ -8,6 +8,29 @@ on:
     branches: [main, master]
 
 jobs:
+  lint-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Ruff
+        run: pip install ruff
+
+      - name: Run Ruff and auto-fix
+        run: |
+          ruff check --fix modules/
+          ruff format modules/
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: auto-fix linting issues"
+          branch: ${{ github.head_ref }}
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -25,14 +48,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e .  # 使用 pyproject.toml 安装依赖
-          pip install pytest mypy black flake8 isort pre-commit
+          pip install -e .
+          pip install pytest mypy ruff
 
       - name: Run linters and type checker
         run: |
-          black --check modules/
-          isort --check modules/
-          flake8 modules/
+          ruff format --check modules/
+          ruff check modules/
           mypy modules/
 
       - name: Run tests

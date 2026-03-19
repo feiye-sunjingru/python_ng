@@ -17,15 +17,61 @@ dependencies = [
     "pre-commit>=4.5.1",
     "pytest>=9.0.2",
     "requests>=2.32.5",
+    "ruff>=0.15.6",
     "types-pyyaml>=6.0.12.20250915",
     "types-requests>=2.32.4.20260107",
 ]
 
-[tool.mypy]
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = false
-
-[tool.black]
-target-version = ["py313"]
+[tool.ruff]
+target-version = "py313"
 line-length = 88
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    ".mypy_cache",
+    ".pytest_cache",
+    "tmp_input",
+    "tmp_output",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle 错误
+    "W",    # pycodestyle 警告
+    "F",    # Pyflakes
+    "I",    # isort (导入排序)
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "UP",   # pyupgrade
+    "N",    # pep8-naming
+    "Q",    # flake8-quotes
+    "PTH",  # flake8-use-pathlib (推荐使用 pathlib)
+    "SIM",  # flake8-simplify
+]
+
+# 忽略的规则
+#ignore = [
+#    "E501",  # 行太长（如果需要严格检查，可以删除这行）
+#]
+
+# 允许自动修复的规则
+fixable = ["ALL"]
+
+[tool.ruff.format]
+# 引用风格：优先使用双引号
+quote-style = "double"
+
+# 缩进风格：空格
+indent-style = "space"
+
+# 是否跳过魔法下划线检测
+skip-magic-trailing-comma = false
+
+# 换行符
+line-ending = "auto"
+
+[tool.ruff.lint.per-file-ignores]
+# 测试文件可以忽略某些规则
+"**/tests/*" = ["PLR2004"]
+"**/examples/*" = ["PLR2004"]

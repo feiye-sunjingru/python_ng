@@ -1,27 +1,18 @@
 {
-    // 指定使用哪个格式化器
-    "pyformat.formatProvider": "black",
-    // black 参数（例如行宽）
-    "pyformat.blackArgs": [
-        "--line-length",
-        "88"
-    ],
-    // isort 参数（兼容 black）
-    "pyformat.isortArgs": [
-        "--profile",
-        "black"
-    ],
-    // 启用自动整理 imports（默认 true）
-    "pyformat.enableImportOrganization": false,
     // 保存时自动格式化 + 整理 imports
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-        "source.organizeImports": true
+        "source.organizeImports": "explicit"
     },
-    // 明确指定 .py 文件使用 PyFormat
+    // 明确指定 .py 文件使用 Ruff 格式化器
     "[python]": {
-        "editor.defaultFormatter": "giyyapan.pyformat"
+        "editor.defaultFormatter": "charliermarsh.ruff"
     },
+    // Ruff 配置 - 已移除弃用的参数设置
+    // Ruff 会自动从 pyproject.toml 读取配置
+    "ruff.interpreter": [
+        "python"
+    ],
     "python.testing.pytestArgs": [
         "."
     ],
