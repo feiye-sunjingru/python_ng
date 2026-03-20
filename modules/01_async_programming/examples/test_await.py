@@ -21,7 +21,8 @@ async def task01():
 
 async def task02():
     print("task02")
-    # 而asyncio.sleep内部会执行await future对象，所以会切换到其他任务执行: task02->task03->sub_task2...
+    # 而asyncio.sleep内部会执行await future对象，所以会切换到其他任务执行:
+    # task02->task03->sub_task2...
     await asyncio.sleep(1)  # 模拟一个耗时 1 秒的 I/O 操作
     result = await sub_task2()
     return result
