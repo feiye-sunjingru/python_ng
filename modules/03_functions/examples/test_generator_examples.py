@@ -28,8 +28,7 @@ def echo():
 
 def read_large_file(file_name):
     """文件行读取生成器：逐行读取文件内容"""
-    file_path = Path.open(file_name)
-    with file_path.open("r", encoding="utf-8") as f:
+    with Path(file_name).open("r", encoding="utf-8") as f:
         for line in f:
             yield line.strip()
 

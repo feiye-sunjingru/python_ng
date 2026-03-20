@@ -54,7 +54,7 @@ def select_content_by_keyword(filename, keyword):
     if not Path.exists(Path(filename)):
         return result
 
-    with Path.open(filename, "r", encoding="utf-8") as f:
+    with Path(filename).open("r", encoding="utf-8") as f:
         for line in f:
             if keyword in line:
                 result.append(line.strip())
