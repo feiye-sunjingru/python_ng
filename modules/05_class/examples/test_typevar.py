@@ -1,13 +1,13 @@
-from typing import Generic, TypeVar
+# from typing import Generic, TypeVar
 
 print("=" * 50)
 print("场景 1：类型推断 - 保持输入输出类型一致")
 print("=" * 50)
 
-T = TypeVar("T")
 
-
-def first(xs: list[T]) -> T:
+# T = TypeVar("T")
+# def first(xs: list[T]) -> T:
+def first[T](xs: list[T]) -> T:
     """返回列表的第一个元素，输入输出类型保持一致"""
     return xs[0]
 
@@ -40,10 +40,9 @@ class Cat(Animal):
         return "meow"
 
 
-T2 = TypeVar("T2", bound=Animal)
-
-
-def make_sound(animal: T2) -> T2:
+# T2 = TypeVar("T2", bound=Animal)
+# def make_sound(animal: T2) -> T2:
+def make_sound[T2: Animal](animal: T2) -> T2:
     """接受 Animal 的子类，并返回相同的具体类型"""
     print(f"{animal.__class__.__name__} says: {animal.speak()}")
     return animal
@@ -58,10 +57,10 @@ print("\n" + "=" * 50)
 print("场景 3：类型限定 - 限制为几种特定类型之一")
 print("=" * 50)
 
-T3 = TypeVar("T3", int, str)
 
-
-def duplicate(x: T3) -> T3:
+# T3 = TypeVar("T3", int, str)
+# def duplicate(x: T3) -> T3:
+def duplicate[T3: (int, str)](x: T3) -> T3:
     """只接受 int 或 str，返回相同类型"""
     return x + x
 
@@ -76,10 +75,10 @@ print("\n" + "=" * 50)
 print("场景 4：泛型类 - 类中使用 TypeVar")
 print("=" * 50)
 
-T4 = TypeVar("T4")
 
-
-class Box(Generic[T4]):
+# T4 = TypeVar("T4")
+# class Box(Generic[T4]):
+class Box[T4]:
     """泛型容器类，可以存储任意类型的值"""
 
     def __init__(self, content: T4) -> None:

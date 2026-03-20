@@ -54,6 +54,7 @@ class Memoize:
     def __call__(self, *args) -> int:
         """缓存已计算的结果，避免重复计算"""
         if args not in self.cache:
+            # 记录参数和结果
             self.cache[args] = self.func(*args)
         return self.cache[args]
 

@@ -8,7 +8,7 @@ class Singleton:
 
     # 它在对象创建过程中被自动调用，早于 __init__
     # 虽然 __new__ 的第一个参数是 cls（代表类本身），
-    # 但它 并不是一个普通的类方法（class method），而是一个 由 Python 解释器特殊处理的方法。
+    # 但它并不是一个普通的类方法（class method），而是一个由 Python 解释器特殊处理的方法
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
             with cls._lock:

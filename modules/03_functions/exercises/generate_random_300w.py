@@ -3,7 +3,7 @@ import random
 
 def func():
     data_list = []
-    for i in range(30000000):
+    for _ in range(30000000):
         val = random.randint(1000, 9999)
         data_list.append(val)
 

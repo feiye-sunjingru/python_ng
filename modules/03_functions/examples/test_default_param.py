@@ -1,4 +1,4 @@
-def func(a1, a2=[1, 2]):
+def func(a1, a2=[1, 2]):  # noqa: B006
     """函数定义 - 可变默认参数"""
     a2.append(a1)
     return a2

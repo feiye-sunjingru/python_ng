@@ -1,5 +1,5 @@
 import hashlib
-import os
+from pathlib import Path
 
 import pandas as pd
 
@@ -42,7 +42,7 @@ def get_max_value(numbers):
 
 def write_student_info(name, gender, age, education):
     """将学生信息写入文件"""
-    with open("tmp_output/student_info.txt", mode="a", encoding="utf-8") as f:
+    with Path("tmp_output/student_info.txt").open(mode="a", encoding="utf-8") as f:
         f.write("*".join([name, gender, str(age), education]) + "\n")
         f.write(f"姓名: {name}, 性别: {gender}, 年龄: {age}, 学历: {education}\n")
 
@@ -50,10 +50,11 @@ def write_student_info(name, gender, age, education):
 def select_content_by_keyword(filename, keyword):
     """读文件，根据关键词选择内容"""
     result = []
-    if not os.path.exists(filename):
+    file_path = Path(filename)
+    if not file_path.exists(file_path):
         return result
 
-    with open(filename, "r", encoding="utf-8") as f:
+    with file_path.open(encoding="utf-8") as f:
         for line in f:
             if keyword in line:
                 result.append(line.strip())
@@ -86,8 +87,10 @@ def get_user_info_from_xlsx(filename, sheet_name="Sheet1"):
 def encrypt(origin):
     """md5加密"""
     origin_bytes = origin.encode("utf-8")
+    # MD5 对象已经计算了 origin_bytes 的哈希
     md5_obj = hashlib.md5(origin_bytes)
-    md5_obj.update(origin_bytes)
+    # 又追加了一次 origin_bytes，相当于加密了两遍相同的数据
+    # md5_obj.update(origin_bytes)
     return md5_obj.hexdigest()
 
 
@@ -103,7 +106,6 @@ def check_user(username, password, user_dict):
 
 
 if __name__ == "__main__":
-    """
     print(count_char("xxxxaacscf", "a"))
     print(len_greater_than_5(["hello", "world", "python", "programming"]))
     print(values_greater_than_10([5, 15, 25, 35]))
@@ -111,7 +113,6 @@ if __name__ == "__main__":
     write_student_info(name="张三", gender="男", age=18, education="本科")
     print(select_content_by_keyword("tmp_output/student_info.txt", "张三"))
     print(change_string("苍老师是东京热的无码女优"))
-    """
 
     # print(encrypt("admin"))
     # print(encrypt("123123"))
@@ -123,4 +124,6 @@ if __name__ == "__main__":
     username = input()
     print("请输入密码：")
     password = input()
+    check_user(username, password, user_dict)
+    check_user(username, password, user_dict)
     check_user(username, password, user_dict)

@@ -39,7 +39,7 @@ def render(obj: Drawable) -> None:
 render(Circle())
 render(Square())
 # draw返回值不同于协议内容
-# render(FakeShape())
+render(FakeShape())  # type: ignore[arg-type]
 
 print("=" * 40)
 print("应用场景 1：文件类对象")

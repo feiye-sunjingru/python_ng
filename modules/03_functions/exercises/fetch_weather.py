@@ -9,6 +9,11 @@ def fetch_weather(city):
     """获取天气数据"""
     url = f"http://ws.webxml.com.cn/WebServices/WeatherWebService.asmx/getWeatherbyCityName?theCityName={city}"
     res = requests.get(url=url)
+
+    # 🆕 调试：打印状态码和响应内容
+    print(f"状态码：{res.status_code}")
+    print(f"响应内容：{res.text[:500]}")  # 只打印前 500 字符
+
     root = ET.XML(res.text)
     return [node.text for node in root]
 
@@ -88,7 +93,7 @@ def format_weather(data_list):
     print(f"🌡️  今日天气：{today_weather}")
 
     # ✅ 美化天气实况显示
-    print(f"📝 天气实况：")
+    print("📝 天气实况：")
     info_dict = parse_weather_info(today_info)
     if info_dict:
         for key, value in info_dict.items():

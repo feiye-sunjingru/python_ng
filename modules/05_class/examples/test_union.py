@@ -1,9 +1,9 @@
-from typing import Union
+# from typing import Union
 
 
 # 值联合类型：int或str
-# 从 Python 3.10 开始，也可以使用更简洁的写法：int | str
-def process(value: Union[int, str]) -> str:
+# Union[int, str]
+def process(value: int | str) -> str:
     if isinstance(value, int):
         return f"Number: {value}"
     else:

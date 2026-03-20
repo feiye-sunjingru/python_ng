@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import requests
 
 
@@ -8,7 +10,7 @@ def write_file(*args, **kwargs):
     1. 每个城市的天气占一行
     2. 每行的格式为: city-北京,cityid-101010100,temp-18...
     """
-    with open("tmp_output/weather_info.txt", "w", encoding="utf-8") as f:
+    with Path("tmp_output/weather_info.txt").open("w", encoding="utf-8") as f:
         for weather_info in args:
             city = weather_info["weatherinfo"]["city"]
             cityid = weather_info["weatherinfo"]["cityid"]
@@ -20,7 +22,7 @@ def write_file(*args, **kwargs):
 
 def get_weather(code):
     """获取天气信息"""
-    url = "http://www.weather.com.cn/data/ks/{}.html".format(code)
+    url = f"http://www.weather.com.cn/data/ks/{code}.html"
     res = requests.get(url=url)
     res.encoding = "utf-8"
     weather_dict = res.json()
@@ -38,5 +40,5 @@ if __name__ == "__main__":
         weather_info = get_weather(city["code"])
         weather_info_list.append(weather_info)
 
-    # print(weather_info_list)
+    print(weather_info_list)
     write_file(*weather_info_list)

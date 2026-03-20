@@ -1,10 +1,11 @@
+from concurrent.futures.thread import ThreadPoolExecutor
+from pathlib import Path
+
+import requests
+
 """
 基于多线程去下载视频
 """
-
-from concurrent.futures.thread import ThreadPoolExecutor
-
-import requests
 
 
 def download_video(url):
@@ -12,7 +13,8 @@ def download_video(url):
     res = requests.get(
         url=url,
         headers={
-            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/\
+                537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
         },
     )
     return res.content
@@ -23,7 +25,7 @@ def outer(file_name):
 
     def write_file(response):
         content = response.result()  # 获取实际响应内容
-        with open(file_name, mode="wb") as file_object:
+        with Path(file_name).open(mode="wb") as file_object:
             file_object.write(content)
         print(f"✅ 已保存: {file_name}")
 

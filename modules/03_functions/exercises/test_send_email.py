@@ -70,12 +70,10 @@ if __name__ == "__main__":
     print(f"收件人：{receiver_email}")
     print(f"密码长度：{len(sender_password) if sender_password else 0}")
     print("=" * 50)
-    print("=" * 50)
 
     # 确认后再发送
     confirm = input(f"确认发送邮件到 {receiver_email}？(y/n): ")
     if confirm.lower() == "y":
         send_email(sender_email, sender_password, receiver_email)
     else:
-        print("已取消发送")
         print("已取消发送")

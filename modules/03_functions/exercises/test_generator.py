@@ -61,7 +61,8 @@ info2 = {
 }
 
 # 方法 1：字典推导式排序
-sorted_info2 = {k: v for k, v in sorted(info2.items(), key=lambda x: x[0])}
+# dict(sorted(info2.items(), key=lambda x: x[0]))
+sorted_info2 = {k: v for k, v in sorted(info2.items(), key=lambda x: x[0])}  # noqa: C416
 print(f"排序后字典：{sorted_info2}")
 
 # 方法 2：排序后拼接成字符串（常用于 API 签名）
@@ -77,9 +78,9 @@ print("=" * 50)
 
 # 3.1 闭包陷阱示例（错误写法）
 print("【错误写法】所有 lambda 共享同一个 i")
-data_list = [lambda x: x + i for i in range(10)]
-v1 = data_list[0](100)
-v2 = data_list[3](100)
+closure_funcs: list = [lambda x: x + i for i in range(10)]  # noqa:B023
+v1 = closure_funcs[0](100)
+v2 = closure_funcs[3](100)
 print(f"data_list[0](100) = {v1}")  # 109 (i=9)
 print(f"data_list[3](100) = {v2}")  # 109 (i=9)
 print("原因：循环结束时 i=9，所有 lambda 都引用同一个 i")
@@ -103,23 +104,23 @@ print("=" * 50)
 print("【列表返回】所有函数共享同一个 i")
 
 
-def num_list():
-    return [lambda x: i * x for i in range(4)]
+def num_list() -> list:
+    return [lambda x: i * x for i in range(4)]  # noqa: B023
 
 
-result = [m(2) for m in num_list()]
-print(f"结果：{result}")  # [6, 6, 6, 6] (i 最终为 3)
+result_num = [m(2) for m in num_list()]
+print(f"结果：{result_num}")  # [6, 6, 6, 6] (i 最终为 3)
 
 # 4.2 生成器返回（同样有闭包陷阱）
 print("\n【生成器返回】同样共享同一个 i")
 
 
 def num_generator():
-    return (lambda x: i * x for i in range(4))
+    return (lambda x: i * x for i in range(4))  # noqa:B023
 
 
-result = [m(2) for m in num_generator()]
-print(f"结果：{result}")  # [6, 6, 6, 6] (i 最终为 3)
+result_li: list[int] = [m(2) for m in num_generator()]
+print(f"结果：{result_li}")  # [6, 6, 6, 6] (i 最终为 3)
 
 # 4.3 正确写法
 print("\n【正确写法】使用默认参数捕获 i")
@@ -129,8 +130,8 @@ def num_correct():
     return [lambda x, i=i: i * x for i in range(4)]
 
 
-result = [m(2) for m in num_correct()]
-print(f"结果：{result}")  # [0, 2, 4, 6]
+result_co = [m(2) for m in num_correct()]
+print(f"结果：{result_co}")  # [0, 2, 4, 6]
 
 
 # ==================== 第 5 组：斐波那契生成器 ====================
@@ -148,14 +149,13 @@ def fib(max_count):
     a, b = 1, 1
     yield a
     yield b
-    for i in range(max_count - 2):
+    for _ in range(max_count - 2):
         a, b = b, a + b
         yield b
 
 
 # 用户输入
-count = input("请输入要生成的斐波那契数列的个数：")
-count = int(count)
+count = int(input("请输入要生成的斐波那契数列的个数："))
 
 # 使用生成器
 fib_generator = fib(count)

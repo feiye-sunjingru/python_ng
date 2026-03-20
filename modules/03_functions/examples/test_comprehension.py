@@ -1,3 +1,6 @@
+import time
+from typing import Any
+
 """
 Python 推导式与生成器示例
 包含：列表推导式、字典推导式、集合推导式、生成器表达式
@@ -74,7 +77,8 @@ print("=" * 50)
 # 列表转字典
 keys = ["a", "b", "c", "d"]
 values = [1, 2, 3, 4]
-d = {k: v for k, v in zip(keys, values)}
+# d = dict(zip(keys, values, strict=True))
+d = {k: v for k, v in zip(keys, values, strict=True)}  # noqa: C416
 print(f"zip 转字典：{d}")
 
 # 平方字典
@@ -127,7 +131,7 @@ print(f"生成器类型：{type(gen_expr)}")  # <class 'generator'>
 
 # 生成器使用
 gen = (x for x in range(5))
-print(f"生成器遍历：", end="")
+print("生成器遍历：", end="")
 for num in gen:
     print(num, end=" ")
 print()
@@ -143,7 +147,7 @@ print("第 7 组：实际应用场景")
 print("=" * 50)
 
 # 1. 提取嵌套数据
-users = [
+users: list[dict[str, Any]] = [
     {"name": "张三", "age": 25, "skills": ["Python", "Java"]},
     {"name": "李四", "age": 30, "skills": ["Python", "Go"]},
     {"name": "王五", "age": 28, "skills": ["Java", "Go"]},
@@ -178,7 +182,6 @@ print("\n" + "=" * 50)
 print("第 8 组：性能对比")
 print("=" * 50)
 
-import time
 
 # 传统循环
 start = time.time()
@@ -195,4 +198,6 @@ time_comp = time.time() - start
 
 print(f"传统循环耗时：{time_loop:.4f} 秒")
 print(f"列表推导式耗时：{time_comp:.4f} 秒")
+print(f"推导式提速：{time_loop / time_comp:.2f} 倍")
+print(f"推导式提速：{time_loop / time_comp:.2f} 倍")
 print(f"推导式提速：{time_loop / time_comp:.2f} 倍")

@@ -19,4 +19,4 @@ def slow_function():
     time.sleep(1)
 
 
-slow_function()  # 输出: slow_function took 1.0012 secondsslow_function()  # 输出: slow_function took 1.0012 seconds
+slow_function()  # 输出: slow_function took 1.0012 secondsslow_function()

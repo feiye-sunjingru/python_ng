@@ -1,10 +1,12 @@
+import sys
+import traceback
+from pathlib import Path
+
 """
 Python 异常处理完整示例
 包含：基础异常处理、多种异常捕获、自定义异常、异常链等
 """
 
-import sys
-import traceback
 
 # ==================== 第 1 组：基础异常处理 ====================
 print("=" * 50)
@@ -122,7 +124,8 @@ def validate_data(data):
     """使用断言验证数据"""
     assert isinstance(data, list), "数据必须是列表"
     assert len(data) > 0, "列表不能为空"
-    assert all(isinstance(x, (int, float)) for x in data), "所有元素必须是数字"
+    # UP038 Use `X | Y` in `isinstance` call instead of `(X, Y)`
+    assert all(isinstance(x, int | float) for x in data), "所有元素必须是数字"
     return sum(data) / len(data)
 
 
@@ -256,20 +259,19 @@ print("第 9 组：资源管理 (with 语句)")
 print("=" * 50)
 
 # 自动资源管理，无需手动 close
+file_path = Path("test_exception.txt")
 try:
-    with open("test_exception.txt", "w", encoding="utf-8") as f:
+    with file_path.open("w", encoding="utf-8") as f:
         f.write("测试内容")
     print("✅ 文件写入成功，自动关闭")
 
-    with open("test_exception.txt", "r", encoding="utf-8") as f:
+    with file_path.open("r", encoding="utf-8") as f:
         content = f.read()
     print(f"✅ 文件读取成功：{content}")
-except IOError as e:
+except OSError as e:
     print(f"❌ 文件操作异常：{e}")
 finally:
     # 清理测试文件
-    import os
-
-    if os.path.exists("test_exception.txt"):
-        os.remove("test_exception.txt")
+    if Path.exists(file_path):
+        Path.unlink(file_path)
         print("🧹 测试文件已清理")

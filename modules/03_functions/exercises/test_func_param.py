@@ -18,7 +18,7 @@ def send_file(file_path):
     return f"Hello,You have a new file: {file_path}"
 
 
-function_dict = {
+function_dict: dict[str, list] = {
     "1": [send_message, ["这是一个测试消息"]],
     "2": [send_image, ["xxx.png", "这是一个测试图片"]],
     "3": [send_emoji, ["这是一个测试表情"]],

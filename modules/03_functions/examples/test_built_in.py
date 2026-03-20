@@ -1,4 +1,5 @@
 import builtins
+from pathlib import Path
 
 # 查看完整的内置函数列表
 print(dir(builtins))
@@ -33,8 +34,8 @@ quotient, remainder = divmod(9, 2)
 print(f"divmod(9, 2) = 商{quotient}, 余{remainder}")  # 商 4, 余 1
 
 # round - 四舍五入
-v = round(4.11786, 2)
-print(f"round(4.11786, 2) = {v}")  # 4.12
+v_round = round(4.11786, 2)
+print(f"round(4.11786, 2) = {v_round}")  # 4.12
 
 
 # ==================== 第 2 组：最值与逻辑判断（4 个）====================
@@ -71,16 +72,16 @@ print("第 3 组：进制转换")
 print("=" * 50)
 
 # bin - 十进制转二进制
-v = bin(10)
-print(f"bin(10) = {v}")  # 0b1010
+v_bin = bin(10)
+print(f"bin(10) = {v_bin}")  # 0b1010
 
 # oct - 十进制转八进制
-v = oct(10)
-print(f"oct(10) = {v}")  # 0o12
+v_oct = oct(10)
+print(f"oct(10) = {v_oct}")  # 0o12
 
 # hex - 十进制转十六进制
-v = hex(10)
-print(f"hex(10) = {v}")  # 0xa
+v_hex = hex(10)
+print(f"hex(10) = {v_hex}")  # 0xa
 
 
 # ==================== 第 4 组：字符与编码（2 个）====================
@@ -89,12 +90,12 @@ print("第 4 组：字符与编码")
 print("=" * 50)
 
 # ord - 字符转 Unicode 码点
-v = ord("武")
-print(f"ord('武') = {v} (十六进制：{hex(v)})")  # 27494
+v_ord = ord("武")
+print(f"ord('武') = {v_ord} (十六进制：{hex(v_ord)})")  # 27494
 
 # chr - Unicode 码点转字符
-v = chr(27494)
-print(f"chr(27494) = {v}")  # 武
+v_chr = chr(27494)
+print(f"chr(27494) = {v_chr}")  # 武
 
 
 # ==================== 第 5 组：类型转换（8 个）====================
@@ -120,26 +121,27 @@ print(f"bool('') = {bool('')}, bool('hello') = {bool('hello')}")  # False, True
 s = "武沛齐"
 b_utf8 = s.encode("utf-8")
 b_gbk = s.encode("gbk")
-print(f"'{s}'.encode('utf-8') = {b_utf8}")
-print(f"'{s}'.encode('gbk') = {b_gbk}")
+# 在 f-string 中对 bytes 变量使用 !r 转换标志，显式表明需要其表示形式（包含 b''）
+print(f"'{s}'.encode('utf-8') = {b_utf8!r}")
+print(f"'{s}'.encode('gbk') = {b_gbk!r}")
 
 # list - 转列表
 lst = list("abc")
 print(f"list('abc') = {lst}")  # ['a', 'b', 'c']
 
 # dict - 创建字典
-d = dict(a=1, b=2)
-d2 = dict(zip(["x", "y"], [10, 20]))
+d = {"a": 1, "b": 2}
+d2 = dict(zip(["x", "y"], [10, 20], strict=True))
 print(f"dict(a=1,b=2) = {d}")
 print(f'dict(zip(["x", "y"], [10, 20]) = {d2}')
 
 # tuple - 转元组
-t = tuple([1, 2, 3])
+t = tuple([1, 2, 3])  # noqa: C409
 print(f"tuple([1,2,3]) = {t}")  # (1, 2, 3)
 
 # set - 转集合（去重）
-s = set([1, 2, 2, 3])
-print(f"set([1,2,2,3]) = {s}")  # {1, 2, 3}
+s_set = set([1, 2, 2, 3])  # noqa: C405
+print(f"set([1,2,2,3]) = {s_set}")  # {1, 2, 3}
 
 
 # ==================== 第 6 组：对象与信息（8 个）====================
@@ -148,12 +150,12 @@ print("第 6 组：对象与信息")
 print("=" * 50)
 
 # len - 获取长度
-print(f"len([1,2,3,4]) = {len([1,2,3,4])}")  # 4
+print(f"len([1,2,3,4]) = {len([1, 2, 3, 4])}")  # 4
 print(f"len('Hello') = {len('Hello')}")  # 5
 
 # type - 获取类型
-print(f"type(10) = {type(10)}")  # <class 'int'>
-print(f"type('hello') = {type('hello')}")  # <class 'str'>
+print(f"type(10) = {type(10)}")  # <class 'int'> # noqa:UP003
+print(f"type('hello') = {type('hello')}")  # <class 'str'> # noqa:UP003
 
 # id - 获取内存地址
 a = 10
@@ -164,18 +166,15 @@ print(f"id(10) = {id(a)}, id(b) = {id(b)}")  # 相同（同一对象）
 h = hash("hello")
 print(f"hash('hello') = {h}")
 
+
 # callable - 判断是否可调用
-v1 = "武沛齐"
-v2 = lambda x: x
-
-
-def v3():
+def v3_f():
     pass
 
 
-print(f"callable('字符串') = {callable(v1)}")  # False
-print(f"callable(lambda) = {callable(v2)}")  # True
-print(f"callable(函数) = {callable(v3)}")  # True
+print(f"callable('字符串') = {callable('武沛齐')}")  # False
+print(f"callable(lambda) = {callable(lambda x: x)}")  # True
+print(f"callable(函数) = {callable(v3_f)}")  # True
 
 # dir - 查看对象属性
 print(f"dir(builtins) 返回 {len(dir(builtins))} 个内置名称")
@@ -211,11 +210,11 @@ for index, color in enumerate(colors):
     print(f"  {index}: {color}")
 
 # zip - 并行遍历多个序列
-v1 = [11, 22, 33]
-v2 = [55, 66, 77]
-v3 = [10, 20, 30]
+v1_li: list[int] = [11, 22, 33]
+v2_li: list[int] = [55, 66, 77]
+v3_li: list[int] = [10, 20, 30]
 print("zip 并行遍历:")
-for item in zip(v1, v2, v3):
+for item in zip(v1_li, v2_li, v3_li, strict=True):
     print(f"  {item}")
 
 # sorted - 排序（返回新列表）
@@ -243,7 +242,7 @@ print("sorted 按 age 从大到小排序:")
 for name, data in result_age:
     print(f"  {name}: id={data['id']}, age={data['age']}")
 
-data_list = [
+data_list: list[str] = [
     "1-5 编译器和解释器.mp4",
     "1-7 今日作业.mp4",
     "1-9 Python解释器种类.mp4",
@@ -264,10 +263,12 @@ data_list = [
     "1-11 环境搭建说明.mp4",
 ]
 
-result = sorted(data_list, key=lambda x: int(x.split()[0].split("-")[-1]))
+result_job: list[str] = sorted(
+    data_list, key=lambda x: int(x.split()[0].split("-")[-1])
+)
 print("sorted 按数字排序:")
-for item in result:
-    print(item)
+for item_job in result_job:
+    print(item_job)
 # ==================== 第 8 组：文件操作（1 个）====================
 print("\n" + "=" * 50)
 print("第 8 组：文件操作")
@@ -275,9 +276,12 @@ print("=" * 50)
 
 if __name__ == "__main__":
     # open - 文件读写
-    with open("test.txt", "w", encoding="utf-8") as f:
+    file_path = Path("test.txt")
+    with file_path.open("w", encoding="utf-8") as f:
         f.write("Hello, Python!")
 
-    with open("test.txt", "r", encoding="utf-8") as f:
+    with file_path.open("r", encoding="utf-8") as f:
         content = f.read()
+        print(f"文件内容：{content}")
+        print(f"文件内容：{content}")
         print(f"文件内容：{content}")
