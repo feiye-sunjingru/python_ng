@@ -1,5 +1,4 @@
 import asyncio
-import time
 
 
 def cpu_bound_task(n):

@@ -8,6 +8,7 @@ name = "武涛齐"
 global_counter = 0
 
 
+# 注意这里没有function 参数
 def run():
     """创建闭包函数"""
     name = "alex"
@@ -36,6 +37,7 @@ def get_score_data():
     def inner(val):
         scores.append(val)
         print(scores)
+        return scores
 
     return inner
 

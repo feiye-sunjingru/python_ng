@@ -1,14 +1,11 @@
-# -*- coding: utf-8 -*-
+import random
+from functools import wraps
+from pathlib import Path
+
 """
 装饰器练习示例
 功能：演示多种装饰器的使用场景
 """
-
-# ==================== 导入模块 ====================
-import os
-import random
-from functools import wraps
-from pathlib import Path
 
 # ==================== 装饰器定义 ====================
 
@@ -76,7 +73,7 @@ def func_int():
 @check_path
 def write_userinfo(path):
     """写入用户信息到指定文件"""
-    with open(path, mode="w", encoding="utf-8") as file_obj:
+    with Path(path).open(mode="w", encoding="utf-8") as file_obj:
         file_obj.write("武沛齐")
 
 
@@ -100,4 +97,6 @@ if __name__ == "__main__":
     print("测试 check_path 装饰器")
     print("=" * 40)
     write_userinfo("tmp_output/bin/xxx.txt")
+    print("文件写入完成")
+    print("文件写入完成")
     print("文件写入完成")

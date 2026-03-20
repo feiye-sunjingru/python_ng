@@ -1,4 +1,5 @@
-import os
+from pathlib import Path
+from typing import Any
 
 import requests
 
@@ -7,7 +8,7 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ..."}
 
 OUTPUT_DIR = "tmp_output"
 
-DB = {
+DB: dict[str, dict[str, Any]] = {
     "1": {
         "area": "下载花瓣网图片专区",
         "resources": {
@@ -65,14 +66,14 @@ DB = {
 
 def download(area: str) -> None:
     """下载指定专区的资源"""
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    Path.mkdir(Path(OUTPUT_DIR), exist_ok=True)
     content_dict = DB[area]["resources"]
     ext = DB[area]["ext"]
     selected = DB[area]["selected"]
 
     while True:
         print(f"\n--- {DB[area]['area']} ---")
-        for key, (name, url) in content_dict.items():
+        for key, (name, _) in content_dict.items():
             if key not in selected:
                 print(f"  {key}. {name}")
 
@@ -93,7 +94,7 @@ def download(area: str) -> None:
             res = requests.get(url, headers=HEADERS)
             if res.status_code == 200:
                 filename = f"{name}.{ext}"
-                with open(f"{OUTPUT_DIR}/{filename}", "wb") as f:
+                with Path(f"{OUTPUT_DIR}/{filename}").open("wb") as f:
                     f.write(res.content)
                 selected.add(choice)
                 print(f"✅ 成功下载: {filename}")

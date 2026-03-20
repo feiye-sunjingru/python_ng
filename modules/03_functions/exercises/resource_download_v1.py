@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 
 import requests
 
@@ -32,7 +32,7 @@ def download_image():
 
     while True:
         print("\n--- 图片下载专区 ---")
-        for key, (name, url) in image_dict.items():
+        for key, (name, _) in image_dict.items():
             if key not in downloaded_images:
                 print(f"  {key}. {name}")
 
@@ -51,13 +51,15 @@ def download_image():
 
         # 下载图片
         headers = {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/\
+                537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
         }
         try:
             res = requests.get(url, headers=headers)
             if res.status_code == 200:
                 filename = f"{name}.jpg"
-                with open(filename, "wb") as f:
+                file_path = Path(filename)
+                with file_path.open("wb") as f:
                     f.write(res.content)
                 downloaded_images.add(choice)
                 print(f"✅ 成功下载: {filename}")
@@ -87,7 +89,7 @@ def download_douyin():
 
     while True:
         print("\n--- 抖音短视频下载专区 ---")
-        for key, (name, url) in video_dict.items():
+        for key, (name, _) in video_dict.items():
             if key not in downloaded_videos:
                 print(f"  {key}. {name}")
 
@@ -105,13 +107,14 @@ def download_douyin():
             continue
 
         headers = {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/\
+                537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
         }
         try:
             res = requests.get(url, headers=headers)
             if res.status_code == 200:
                 filename = f"{name}.mp4"
-                with open(filename, "wb") as f:
+                with Path(filename).open("wb") as f:
                     f.write(res.content)
                 downloaded_videos.add(choice)
                 print(f"✅ 成功下载: {filename}")
@@ -132,7 +135,7 @@ def download_nba():
 
     while True:
         print("\n--- NBA锦集下载专区 ---")
-        for key, (name, url) in nba_dict.items():
+        for key, (name, _) in nba_dict.items():
             if key not in downloaded_nba:
                 print(f"  {key}. {name}")
 
@@ -150,13 +153,14 @@ def download_nba():
             continue
 
         headers = {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/\
+                537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
         }
         try:
             res = requests.get(url, headers=headers)
             if res.status_code == 200:
                 filename = f"{name}.mp4"
-                with open(filename, "wb") as f:
+                with Path(filename).open("wb") as f:
                     f.write(res.content)
                 downloaded_nba.add(choice)
                 print(f"✅ 成功下载: {filename}")

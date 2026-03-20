@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Lambda 表达式测试模块
 功能：演示和测试 lambda 表达式的各种使用场景
@@ -16,19 +15,19 @@ class TestLambda(unittest.TestCase):
 
     def test_lambda_basic(self):
         """测试 lambda 基础语法"""
-        add = lambda x, y: x + y
+        add = lambda x, y: x + y  # noqa: E731
         self.assertEqual(add(3, 5), 8)
         self.assertEqual(add(10, 20), 30)
 
     def test_lambda_with_no_args(self):
         """测试 lambda 无参数"""
-        greet = lambda: "Hello, World!"
+        greet = lambda: "Hello, World!"  # noqa: E731
         self.assertEqual(greet(), "Hello, World!")
 
     def test_lambda_with_map(self):
         """测试 lambda 与 map 函数配合"""
         numbers = [1, 2, 3, 4, 5]
-        squared = list(map(lambda x: x**2, numbers))
+        squared = list(map(lambda x: x**2, numbers))  # noqa: C417
         self.assertEqual(squared, [1, 4, 9, 16, 25])
 
     def test_lambda_with_filter(self):
@@ -51,12 +50,12 @@ class TestLambda(unittest.TestCase):
 
     def test_lambda_multiple_args(self):
         """测试 lambda 多参数"""
-        multiply = lambda x, y, z: x * y * z
+        multiply = lambda x, y, z: x * y * z  # noqa: E731
         self.assertEqual(multiply(2, 3, 4), 24)
 
     def test_lambda_default_args(self):
         """测试 lambda 默认参数"""
-        power = lambda x, n=2: x**n
+        power = lambda x, n=2: x**n  # noqa: E731
         self.assertEqual(power(3), 9)
         self.assertEqual(power(3, 3), 27)
 
@@ -74,14 +73,14 @@ class TestLambda(unittest.TestCase):
 
     def test_lambda_with_if_else(self):
         """测试 lambda 中的条件表达式"""
-        classify = lambda x: "正数" if x > 0 else ("零" if x == 0 else "负数")
+        classify = lambda x: "正数" if x > 0 else ("零" if x == 0 else "负数")  # noqa: E731
         self.assertEqual(classify(10), "正数")
         self.assertEqual(classify(0), "零")
         self.assertEqual(classify(-5), "负数")
 
     def test_lambda_with_closure_error(self):
         """测试 lambda 闭包中变量捕获问题"""
-        funcs = [lambda x: x + i for i in range(3)]
+        funcs = [lambda x: x + i for i in range(3)]  # noqa: B023
         results = [f(0) for f in funcs]
         self.assertEqual(results, [2, 2, 2])  # ❌ 错误结果，i 的值被捕获为最后一个值
 

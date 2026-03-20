@@ -1,12 +1,12 @@
-# -*- coding: utf-8 -*-
+import tempfile
+import unittest
+from pathlib import Path
+
 """
 生成器测试模块
 功能：演示和测试生成器函数的各种使用场景
 """
 
-import os
-import tempfile
-import unittest
 
 # ==================== 生成器函数定义 ====================
 
@@ -26,9 +26,10 @@ def echo():
         print(f"收到：{received}")
 
 
-def read_large_file(file_path):
+def read_large_file(file_name):
     """文件行读取生成器：逐行读取文件内容"""
-    with open(file_path, "r", encoding="utf-8") as f:
+    file_path = Path.open(file_name)
+    with file_path.open("r", encoding="utf-8") as f:
         for line in f:
             yield line.strip()
 
@@ -99,7 +100,7 @@ class TestGenerator(unittest.TestCase):
             lines = list(read_large_file(temp_path))
             self.assertEqual(lines, ["line1", "line2", "line3"])
         finally:
-            os.unlink(temp_path)  # 清理临时文件
+            Path.unlink(temp_path)  # 清理临时文件
 
     def test_fibonacci_sequence(self):
         """测试斐波那契数列生成器"""
@@ -130,4 +131,6 @@ class TestGenerator(unittest.TestCase):
 
 if __name__ == "__main__":
     # 运行测试
+    unittest.main(verbosity=2)
+    unittest.main(verbosity=2)
     unittest.main(verbosity=2)

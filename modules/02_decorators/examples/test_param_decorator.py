@@ -18,6 +18,7 @@ def repeat(n):
     return decorator
 
 
+# 需要再套一层，才能使用参数
 @repeat(3)
 def greet():
     print("Hi!")

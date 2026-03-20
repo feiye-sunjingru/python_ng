@@ -12,7 +12,6 @@ def download():
 
 
 def upload():
-    file_name = "rose.zip"
     print(COUNTRY)
     print(CITY_LIST)
 

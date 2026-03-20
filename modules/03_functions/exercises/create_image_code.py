@@ -2,6 +2,7 @@
 # 需要提前安装 pillow 模块：pip3 install pillow
 
 import random
+from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -44,7 +45,7 @@ def create_image_code(
 
     def create_points():
         """绘制干扰点"""
-        chance = min(100, max(0, int(2)))  # 干扰点出现概率控制在 [0, 100]
+        chance = min(100, max(0, 2))  # 干扰点出现概率控制在 [0, 100]
         for w in range(width):
             for h in range(height):
                 tmp = random.randint(0, 100)
@@ -78,7 +79,7 @@ def create_image_code(
     code = create_code()
 
     # 将图片写入文件
-    with open(img_file_path, mode="wb") as img_object:
+    with Path.open(img_file_path, mode="wb") as img_object:
         img.save(img_object)
 
     return code

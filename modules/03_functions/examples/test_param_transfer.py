@@ -115,7 +115,7 @@ def test_special_cases():
         lst_copy = lst[:]  # 或 lst.copy()
         print(f"   函数内 - 副本 id: {id(lst_copy)}, 原列表 id: {id(lst)}")
         lst_copy.append(4)
-        print(f"   函数内 - 副本修改后：{lst_copy}")
+        print(f"   函数内 - 副本修改后id: {id(lst_copy)}, 值：{lst_copy}")
 
     my_list = [1, 2, 3]
     print(f"调用前 - 原列表：{my_list}")
