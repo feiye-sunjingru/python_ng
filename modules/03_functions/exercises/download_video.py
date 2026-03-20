@@ -13,7 +13,7 @@ def download_video(filename, url):
         },
     )
     # wb 模式写入二进制数据
-    with Path.open(f"tmp_output/{filename}.mp4", mode="wb") as f:
+    with Path(f"tmp_output/{filename}.mp4").open(mode="wb") as f:
         f.write(res.content)
 
 

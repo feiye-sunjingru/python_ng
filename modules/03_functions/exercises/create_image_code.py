@@ -79,7 +79,7 @@ def create_image_code(
     code = create_code()
 
     # 将图片写入文件
-    with Path.open(img_file_path, mode="wb") as img_object:
+    with Path(img_file_path).open(mode="wb") as img_object:
         img.save(img_object)
 
     return code
